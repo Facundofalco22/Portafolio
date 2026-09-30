@@ -1,0 +1,1120 @@
+/* ==========================================================
+   ÍNDICE
+   1. Variables y base
+   2. Botones
+   3. Navbar
+   4. Hero
+   5. Sobre mí
+   6. Skills
+   7. Proyectos
+   8. Mi camino (timeline)
+   9. Contacto
+   10. Footer
+   11. Animaciones
+   12. Responsive
+   ========================================================== */
+
+
+/* ==========================================================
+   1. VARIABLES Y BASE
+   ========================================================== */
+:root {
+  --negro: #080808;
+  --negro-secundario: #111111;
+  --verde: #00C853;
+  --verde-oscuro: #087F3F;
+  --dorado: #D4AF37;
+  --blanco: #F5F5F5;
+  --gris: #9A9A9A;
+  --font-principal: 'Poppins', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--negro);
+  color: var(--blanco);
+  font-family: var(--font-principal);
+}
+
+.dorado {
+  color: var(--dorado);
+}
+
+
+/* ==========================================================
+   2. BOTONES
+   ========================================================== */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease, color 0.25s ease;
+}
+
+.btn-primario {
+  background-color: var(--verde);
+  color: var(--negro);
+}
+
+.btn-primario:hover {
+  background-color: var(--verde-oscuro);
+  transform: translateY(-2px);
+}
+
+.btn-secundario {
+  background-color: transparent;
+  color: var(--verde);
+  border: 2px solid var(--verde);
+}
+
+.btn-secundario:hover {
+  background-color: var(--verde);
+  color: var(--negro);
+}
+
+
+/* ==========================================================
+   3. NAVBAR
+   ========================================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--negro-secundario);
+  padding: 1rem 5%;
+  border-bottom: 1px solid var(--verde-oscuro);
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+}
+
+.navbar-logo span {
+  color: var(--dorado);
+  font-size: 1.8rem;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+.navbar-links a {
+  color: var(--blanco);
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.navbar-links a:hover {
+  color: var(--verde);
+  transition: color 0.25s ease;
+}
+
+.btn-github {
+  background-color: var(--verde);
+  color: var(--blanco);
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-github:hover {
+  background-color: var(--verde-oscuro);
+}
+
+
+/* ==========================================================
+   4. HERO
+   ========================================================== */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  min-height: 90vh;
+  padding: 0 5%;
+  gap: 2rem;
+  background: var(--negro) url("../img/icons/banner.png") no-repeat center / cover;
+}
+
+/* Oscurece la izquierda para que el texto se lea */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.55) 50%, rgba(10,10,10,.15) 100%);
+  pointer-events: none;
+}
+
+/* Contenido por encima del degradado */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----- Texto ----- */
+.hero-saludo {
+  font-size: 2.1rem;
+  color: var(--gris);
+  letter-spacing: 1px;
+}
+
+.hero-texto h1 {
+  font-size: 3rem;
+  margin: 1.5rem 0;
+  color: var(--verde);
+}
+
+.hero-descripcion {
+  color: var(--gris);
+  margin: 1.5rem 0;
+  max-width: 500px;
+  line-height: 1.5;
+}
+
+.hero-estudiante {
+  color: var(--gris);
+  font-size: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-botones {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ----- Redes ----- */
+.hero-redes {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.hero-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.hero-redes a:hover {
+  background-color: var(--verde-oscuro);
+  transform: translateY(-3px);
+}
+
+.hero-redes svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--verde);
+  transition: fill 0.25s ease;
+}
+
+.hero-redes a:hover svg {
+  fill: var(--negro);
+}
+
+/* ----- Terminal (translúcida para que se vea el banner) ----- */
+.hero-terminal {
+  background-color: rgba(8, 12, 10, 0.7);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 200, 83, 0.15);
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  gap: 1.35rem;
+  padding: 0.8rem 1rem;
+  background-color: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid var(--verde-oscuro);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.rojo     { background-color: #FF5F56; }
+.dot.amarillo { background-color: #FFBD2E; }
+.dot.verde    { background-color: var(--verde); }
+
+.terminal-body {
+  padding: 1.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.terminal-body p {
+  color: var(--gris);
+}
+
+.prompt {
+  color: var(--verde);
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.status-ok {
+  color: var(--verde);
+  font-weight: bold;
+}
+
+
+/* ==========================================================
+   5. SOBRE MÍ
+   ========================================================== */
+.sobre-mi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  min-height: 70vh;
+  padding: 5rem 5%;
+  background-color: var(--negro);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+/* ----- Texto ----- */
+.sobre-mi-texto h2 {
+  font-size: 3.5rem;
+  color: var(--verde);
+  margin-bottom: 2rem;
+}
+
+.sobre-mi-texto p {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ----- Estadísticas (grilla 2x2) ----- */
+.sobre-mi-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--verde);
+  box-shadow: 0 0 20px rgba(0, 200, 83, 0.15);
+}
+
+.stat-numero {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--verde);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--gris);
+  letter-spacing: 0.5px;
+}
+
+
+/* ==========================================================
+   6. SKILLS
+   ========================================================== */
+.skills {
+  padding: 5rem 5%;
+  background-color: var(--negro);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+.skills-titulo {
+  font-size: 3.5rem;
+  color: var(--verde);
+  text-align: left;
+  margin: 0 0 3rem;
+}
+
+/* Tarjetas de ancho fijo, alineadas a la izquierda */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 165px);
+  justify-content: start;
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 10px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--verde);
+  box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
+}
+
+/* invert(1) pasa los SVG negros a blancos para que se vean */
+.skill-item img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: 0.9;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.skill-item:hover img {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.skill-item span {
+  font-size: 1.15rem;
+  color: var(--gris);
+  font-weight: 600;
+}
+
+.skill-item:hover span {
+  color: var(--verde);
+}
+
+
+/* ==========================================================
+   7. PROYECTOS
+   ========================================================== */
+.proyectos {
+  padding: 5rem 5%;
+  background-color: var(--negro);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+.proyectos-titulo {
+  font-size: 3.5rem;
+  color: var(--verde);
+  margin-bottom: 2.5rem;
+}
+
+/* ----- Filtros ----- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.filtro-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--gris);
+  background: transparent;
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.filtro-btn:hover {
+  color: var(--verde);
+  border-color: var(--verde);
+}
+
+.filtro-btn.activo {
+  color: var(--negro);
+  background-color: var(--verde);
+  border-color: var(--verde);
+}
+
+.filtro-btn:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
+
+/* ----- Grilla: tarjetas de al menos 420px ----- */
+.proyectos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 2.25rem;
+}
+
+/* ----- Tarjeta ----- */
+.proyecto-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;   /* evita que el zoom de la imagen se salga de la tarjeta */
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 14px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.proyecto-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--verde);
+  box-shadow: 0 0 26px rgba(0, 200, 83, 0.2);
+}
+
+/* Imagen (funciona con o sin el contenedor .proyecto-img) */
+.proyecto-card > img,
+.proyecto-img img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: linear-gradient(135deg, #0d1f15, #050505);
+  transition: transform 0.4s ease;
+}
+
+.proyecto-img {
+  overflow: hidden;
+}
+
+.proyecto-card:hover > img,
+.proyecto-card:hover .proyecto-img img {
+  transform: scale(1.05);
+}
+
+/* Contenido: título > descripción > tecnologías */
+.proyecto-card > h3,
+.proyecto-card > p,
+.proyecto-card > .tecnologias {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
+.proyecto-info {
+  flex: 1;
+  padding: 1.75rem 1.75rem 1.5rem;
+}
+
+.proyecto-card h3 {
+  font-size: 1.9rem;
+  line-height: 1.2;
+  color: #fff;
+  margin: 0 0 0.7rem;
+}
+
+.proyecto-card > h3 {
+  padding-top: 1.75rem;
+}
+
+.proyecto-card p {
+  font-size: 1.2rem;
+  color: var(--gris);
+  line-height: 1.6;
+  margin: 0 0 1.4rem;
+}
+
+.proyecto-card > p {
+  flex: 1;   /* empuja tecnologías y links hacia abajo */
+}
+
+.proyecto-card > .tecnologias {
+  padding-bottom: 1.75rem;
+}
+
+/* ----- Tecnologías ----- */
+.tecnologias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.tecnologias span {
+  padding: 0.4rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--verde);
+  background-color: rgba(0, 200, 83, 0.1);
+  border: 1px solid rgba(0, 200, 83, 0.25);
+  border-radius: 999px;
+}
+
+/* ----- Links ----- */
+.proyecto-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 1.75rem;
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+.link-github {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--gris);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-github:hover {
+  color: var(--verde);
+}
+
+.proyecto-links .btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1.1rem;
+}
+
+
+/* ==========================================================
+   8. MI CAMINO (línea de tiempo vertical)
+   ========================================================== */
+.mi-camino {
+  padding: 5rem 5%;
+  background-color: var(--negro);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+.mi-camino-titulo {
+  font-size: 3.5rem;
+  color: var(--verde);
+  margin-bottom: 3rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  padding-left: 2.5rem;
+}
+
+/* Línea vertical que une todos los hitos */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 0.5rem;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--verde), var(--verde-oscuro));
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* Punto sobre la línea */
+.timeline-punto {
+  position: absolute;
+  left: -2.5rem;
+  top: 0.35rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--negro);
+  border: 3px solid var(--verde);
+  box-shadow: 0 0 12px rgba(0, 200, 83, 0.45);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.timeline-item:hover .timeline-punto {
+  background-color: var(--verde);
+  transform: scale(1.2);
+}
+
+/* Hito actual: punto relleno */
+.timeline-item.actual .timeline-punto {
+  background-color: var(--verde);
+}
+
+.timeline-fecha {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--verde);
+  margin-bottom: 0.3rem;
+}
+
+.timeline-item h4 {
+  font-size: 1.7rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-item p {
+  font-size: 1.2rem;
+  color: var(--gris);
+  line-height: 1.6;
+  max-width: 60ch;
+}
+
+
+/* ==========================================================
+   9. CONTACTO
+   ========================================================== */
+.contacto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+  padding: 5rem 5%;
+  background-color: var(--negro);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+/* ----- Columna izquierda ----- */
+.contacto-titulo {
+  font-size: 3.5rem;
+  color: var(--verde);
+  line-height: 1.15;
+  max-width: 14ch;
+  margin-bottom: 1.5rem;
+}
+
+.contacto-disponible {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 1.1rem;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--verde);
+  background-color: rgba(0, 200, 83, 0.1);
+  border: 1px solid rgba(0, 200, 83, 0.3);
+  border-radius: 999px;
+}
+
+.punto-disponible {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--verde);
+  box-shadow: 0 0 8px var(--verde);
+}
+
+.contacto-texto {
+  font-size: 1.3rem;
+  color: var(--gris);
+  line-height: 1.6;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+
+.contacto-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contacto-link {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gris);
+  text-decoration: none;
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 10px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+.contacto-link svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--verde);
+}
+
+.contacto-link:hover {
+  transform: translateY(-4px);
+  color: #fff;
+  border-color: var(--verde);
+  box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
+}
+
+/* ----- Formulario ----- */
+.contacto-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  padding: 2.25rem;
+  background-color: var(--negro-secundario);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 200, 83, 0.1);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.campo label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gris);
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-family: inherit;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: var(--negro);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: #666;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+  outline: none;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 3px rgba(0, 200, 83, 0.2);
+}
+
+.contacto-enviar {
+  align-self: flex-start;
+  padding: 1rem 2.4rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+  border: none;
+}
+
+.contacto-link:focus-visible,
+.contacto-enviar:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   10. FOOTER
+   ========================================================== */
+.footer {
+  padding: 3.5rem 5% 1.5rem;
+  background-color: var(--negro-secundario);
+  border-top: 1px solid var(--verde-oscuro);
+}
+
+/* Fila superior: marca | navegación | redes */
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr auto;
+  align-items: start;
+  gap: 3rem;
+}
+
+/* ----- Marca ----- */
+.footer-logo {
+  display: inline-block;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 0.9rem;
+}
+
+.footer-tagline {
+  max-width: 340px;
+  color: var(--gris);
+  line-height: 1.6;
+}
+
+/* ----- Navegación ----- */
+.footer-nav {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.footer-nav a {
+  color: var(--gris);
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--verde);
+}
+
+/* ----- Redes ----- */
+.footer-redes {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--negro);
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-redes a:hover {
+  background-color: var(--verde);
+  transform: translateY(-3px);
+}
+
+.footer-redes svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--verde);
+  transition: fill 0.25s ease;
+}
+
+.footer-redes a:hover svg {
+  fill: var(--negro);
+}
+
+/* ----- Fila inferior ----- */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-copy {
+  color: var(--gris);
+  font-size: 0.95rem;
+}
+
+.footer-subir {
+  color: var(--verde);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.footer-subir:hover {
+  opacity: 0.75;
+}
+
+.footer a:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   11. ANIMACIONES
+   ========================================================== */
+.animar-entrada {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.animar-entrada.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== EXTRAS PARA EL JAVASCRIPT =====
+   Pegar al final de styles.css, ANTES de la sección de responsive
+   (o al final de todo el archivo). */
+
+/* Scroll suave y margen para que la navbar fija no tape los títulos */
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 80px;   /* alto aproximado de tu navbar */
+}
+
+/* ----- Botón hamburguesa (oculto en pantallas grandes) ----- */
+.hamburguesa {
+  display: none;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--verde);
+  background: transparent;
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.hamburguesa:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
+}
+
+/* ----- Mensaje del formulario ----- */
+.form-estado {
+  min-height: 1.4em;
+  font-weight: 600;
+}
+
+.form-estado.ok    { color: var(--verde); }
+.form-estado.error { color: #FF5F56; }
+
+/* ----- Menú desplegable en celular ----- */
+@media (max-width: 900px) {
+  .hamburguesa {
+    display: block;
+  }
+
+  .navbar .btn-github {
+    display: none;   /* el GitHub ya está en el hero y el footer */
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background-color: var(--negro-secundario);
+    border-bottom: 1px solid var(--verde-oscuro);
+  }
+
+  .navbar-links.activo {
+    display: flex;
+  }
+
+  .navbar-links a {
+    display: block;
+    padding: 1rem 5%;
+  }
+}
+
+/* ==========================================================
+   12. RESPONSIVE (de pantalla grande a chica)
+   ========================================================== */
+@media (max-width: 900px) {
+  /* Hero */
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 4rem 5%;
+  }
+  .hero::before {
+    background: linear-gradient(0deg, rgba(10,10,10,.88), rgba(10,10,10,.65));
+  }
+
+  /* Sobre mí */
+  .sobre-mi {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 4rem 5%;
+  }
+
+  /* Contacto */
+  .contacto {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .contacto-titulo {
+    max-width: none;
+  }
+}
+
+@media (max-width: 800px) {
+  /* Footer */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-nav {
+    grid-template-columns: repeat(2, auto);
+    justify-content: start;
+    column-gap: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Skills */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skill-item img {
+    width: 56px;
+    height: 56px;
+  }
+
+  /* Proyectos */
+  .proyectos-titulo { font-size: 2.6rem; }
+  .proyecto-card h3 { font-size: 1.6rem; }
+  .filtro-btn { font-size: 1rem; padding: 0.65rem 1.4rem; }
+
+  /* Mi camino */
+  .mi-camino-titulo { font-size: 2.6rem; }
+  .timeline-item h4 { font-size: 1.45rem; }
+
+  /* Contacto */
+  .contacto-titulo { font-size: 2.5rem; }
+  .contacto-texto { font-size: 1.15rem; }
+  .contacto-link { flex: 1 1 100%; }
+  .contacto-form { padding: 1.5rem; }
+  .contacto-enviar { align-self: stretch; }
+}
