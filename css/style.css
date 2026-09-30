@@ -1,23 +1,3 @@
-/* ==========================================================
-   ÍNDICE
-   1. Variables y base
-   2. Botones
-   3. Navbar
-   4. Hero
-   5. Sobre mí
-   6. Skills
-   7. Proyectos
-   8. Mi camino (timeline)
-   9. Contacto
-   10. Footer
-   11. Animaciones
-   12. Responsive
-   ========================================================== */
-
-
-/* ==========================================================
-   1. VARIABLES Y BASE
-   ========================================================== */
 :root {
   --negro: #080808;
   --negro-secundario: #111111;
@@ -46,9 +26,6 @@ body {
 }
 
 
-/* ==========================================================
-   2. BOTONES
-   ========================================================== */
 .btn {
   display: inline-block;
   padding: 0.7rem 1.5rem;
@@ -81,9 +58,6 @@ body {
 }
 
 
-/* ==========================================================
-   3. NAVBAR
-   ========================================================== */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -139,9 +113,6 @@ body {
 }
 
 
-/* ==========================================================
-   4. HERO
-   ========================================================== */
 .hero {
   position: relative;
   display: grid;
@@ -153,7 +124,6 @@ body {
   background: var(--negro) url("../img/icons/banner.png") no-repeat center / cover;
 }
 
-/* Oscurece la izquierda para que el texto se lea */
 .hero::before {
   content: "";
   position: absolute;
@@ -162,13 +132,11 @@ body {
   pointer-events: none;
 }
 
-/* Contenido por encima del degradado */
 .hero > * {
   position: relative;
   z-index: 1;
 }
 
-/* ----- Texto ----- */
 .hero-saludo {
   font-size: 2.1rem;
   color: var(--gris);
@@ -199,42 +167,7 @@ body {
   gap: 1rem;
 }
 
-/* ----- Redes ----- */
-.hero-redes {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
-}
 
-.hero-redes a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: var(--negro-secundario);
-  border: 1px solid var(--verde-oscuro);
-  border-radius: 8px;
-  transition: background-color 0.25s ease, transform 0.25s ease;
-}
-
-.hero-redes a:hover {
-  background-color: var(--verde-oscuro);
-  transform: translateY(-3px);
-}
-
-.hero-redes svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--verde);
-  transition: fill 0.25s ease;
-}
-
-.hero-redes a:hover svg {
-  fill: var(--negro);
-}
-
-/* ----- Terminal (translúcida para que se vea el banner) ----- */
 .hero-terminal {
   background-color: rgba(8, 12, 10, 0.7);
   backdrop-filter: blur(6px);
@@ -285,9 +218,6 @@ body {
 }
 
 
-/* ==========================================================
-   5. SOBRE MÍ
-   ========================================================== */
 .sobre-mi {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -299,7 +229,6 @@ body {
   border-top: 1px solid var(--verde-oscuro);
 }
 
-/* ----- Texto ----- */
 .sobre-mi-texto h2 {
   font-size: 3.5rem;
   color: var(--verde);
@@ -353,9 +282,6 @@ body {
 }
 
 
-/* ==========================================================
-   6. SKILLS
-   ========================================================== */
 .skills {
   padding: 5rem 5%;
   background-color: var(--negro);
@@ -369,7 +295,6 @@ body {
   margin: 0 0 3rem;
 }
 
-/* Tarjetas de ancho fijo, alineadas a la izquierda */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, 165px);
@@ -397,7 +322,6 @@ body {
   box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
 }
 
-/* invert(1) pasa los SVG negros a blancos para que se vean */
 .skill-item img {
   width: 72px;
   height: 72px;
@@ -423,9 +347,6 @@ body {
 }
 
 
-/* ==========================================================
-   7. PROYECTOS
-   ========================================================== */
 .proyectos {
   padding: 5rem 5%;
   background-color: var(--negro);
@@ -438,7 +359,7 @@ body {
   margin-bottom: 2.5rem;
 }
 
-/* ----- Filtros ----- */
+
 .filtros {
   display: flex;
   flex-wrap: wrap;
@@ -474,14 +395,13 @@ body {
   outline-offset: 3px;
 }
 
-/* ----- Grilla: tarjetas de al menos 420px ----- */
+
 .proyectos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
   gap: 2.25rem;
 }
 
-/* ----- Tarjeta ----- */
 .proyecto-card {
   display: flex;
   flex-direction: column;
@@ -498,7 +418,7 @@ body {
   box-shadow: 0 0 26px rgba(0, 200, 83, 0.2);
 }
 
-/* Imagen (funciona con o sin el contenedor .proyecto-img) */
+
 .proyecto-card > img,
 .proyecto-img img {
   display: block;
@@ -550,14 +470,13 @@ body {
 }
 
 .proyecto-card > p {
-  flex: 1;   /* empuja tecnologías y links hacia abajo */
+  flex: 1;   
 }
 
 .proyecto-card > .tecnologias {
   padding-bottom: 1.75rem;
 }
 
-/* ----- Tecnologías ----- */
 .tecnologias {
   display: flex;
   flex-wrap: wrap;
@@ -574,7 +493,7 @@ body {
   border-radius: 999px;
 }
 
-/* ----- Links ----- */
+
 .proyecto-links {
   display: flex;
   align-items: center;
@@ -601,9 +520,6 @@ body {
 }
 
 
-/* ==========================================================
-   8. MI CAMINO (línea de tiempo vertical)
-   ========================================================== */
 .mi-camino {
   padding: 5rem 5%;
   background-color: var(--negro);
@@ -622,7 +538,7 @@ body {
   padding-left: 2.5rem;
 }
 
-/* Línea vertical que une todos los hitos */
+
 .timeline::before {
   content: "";
   position: absolute;
@@ -642,7 +558,7 @@ body {
   padding-bottom: 0;
 }
 
-/* Punto sobre la línea */
+
 .timeline-punto {
   position: absolute;
   left: -2.5rem;
@@ -661,7 +577,7 @@ body {
   transform: scale(1.2);
 }
 
-/* Hito actual: punto relleno */
+
 .timeline-item.actual .timeline-punto {
   background-color: var(--verde);
 }
@@ -688,9 +604,6 @@ body {
 }
 
 
-/* ==========================================================
-   9. CONTACTO
-   ========================================================== */
 .contacto {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -701,7 +614,6 @@ body {
   border-top: 1px solid var(--verde-oscuro);
 }
 
-/* ----- Columna izquierda ----- */
 .contacto-titulo {
   font-size: 3.5rem;
   color: var(--verde);
@@ -740,41 +652,7 @@ body {
   margin-bottom: 2.5rem;
 }
 
-.contacto-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
 
-.contacto-link {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 0.9rem 1.4rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--gris);
-  text-decoration: none;
-  background-color: var(--negro-secundario);
-  border: 1px solid var(--verde-oscuro);
-  border-radius: 10px;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
-}
-
-.contacto-link svg {
-  width: 22px;
-  height: 22px;
-  fill: var(--verde);
-}
-
-.contacto-link:hover {
-  transform: translateY(-4px);
-  color: #fff;
-  border-color: var(--verde);
-  box-shadow: 0 0 20px rgba(0, 200, 83, 0.2);
-}
-
-/* ----- Formulario ----- */
 .contacto-form {
   display: flex;
   flex-direction: column;
@@ -843,16 +721,13 @@ body {
 }
 
 
-/* ==========================================================
-   10. FOOTER
-   ========================================================== */
 .footer {
   padding: 3.5rem 5% 1.5rem;
   background-color: var(--negro-secundario);
   border-top: 1px solid var(--verde-oscuro);
 }
 
-/* Fila superior: marca | navegación | redes */
+
 .footer-top {
   display: grid;
   grid-template-columns: 1.4fr 1fr auto;
@@ -860,7 +735,7 @@ body {
   gap: 3rem;
 }
 
-/* ----- Marca ----- */
+
 .footer-logo {
   display: inline-block;
   font-size: 1.7rem;
@@ -876,7 +751,7 @@ body {
   line-height: 1.6;
 }
 
-/* ----- Navegación ----- */
+
 .footer-nav {
   list-style: none;
   display: grid;
@@ -894,7 +769,7 @@ body {
   color: var(--verde);
 }
 
-/* ----- Redes ----- */
+
 .footer-redes {
   display: flex;
   gap: 1rem;
@@ -928,7 +803,7 @@ body {
   fill: var(--negro);
 }
 
-/* ----- Fila inferior ----- */
+
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -963,9 +838,6 @@ body {
 }
 
 
-/* ==========================================================
-   11. ANIMACIONES
-   ========================================================== */
 .animar-entrada {
   opacity: 0;
   transform: translateY(20px);
@@ -977,11 +849,7 @@ body {
   transform: translateY(0);
 }
 
-/* ===== EXTRAS PARA EL JAVASCRIPT =====
-   Pegar al final de styles.css, ANTES de la sección de responsive
-   (o al final de todo el archivo). */
 
-/* Scroll suave y margen para que la navbar fija no tape los títulos */
 html {
   scroll-behavior: smooth;
 }
@@ -990,7 +858,7 @@ section[id] {
   scroll-margin-top: 80px;   /* alto aproximado de tu navbar */
 }
 
-/* ----- Botón hamburguesa (oculto en pantallas grandes) ----- */
+
 .hamburguesa {
   display: none;
   padding: 0.4rem 0.8rem;
@@ -1008,7 +876,7 @@ section[id] {
   outline-offset: 3px;
 }
 
-/* ----- Mensaje del formulario ----- */
+
 .form-estado {
   min-height: 1.4em;
   font-weight: 600;
@@ -1017,14 +885,14 @@ section[id] {
 .form-estado.ok    { color: var(--verde); }
 .form-estado.error { color: #FF5F56; }
 
-/* ----- Menú desplegable en celular ----- */
+
 @media (max-width: 900px) {
   .hamburguesa {
     display: block;
   }
 
   .navbar .btn-github {
-    display: none;   /* el GitHub ya está en el hero y el footer */
+    display: none;   
   }
 
   .navbar-links {
@@ -1049,11 +917,8 @@ section[id] {
   }
 }
 
-/* ==========================================================
-   12. RESPONSIVE (de pantalla grande a chica)
-   ========================================================== */
+
 @media (max-width: 900px) {
-  /* Hero */
   .hero {
     grid-template-columns: 1fr;
     padding: 4rem 5%;
@@ -1062,14 +927,13 @@ section[id] {
     background: linear-gradient(0deg, rgba(10,10,10,.88), rgba(10,10,10,.65));
   }
 
-  /* Sobre mí */
   .sobre-mi {
     grid-template-columns: 1fr;
     gap: 2.5rem;
     padding: 4rem 5%;
   }
 
-  /* Contacto */
+
   .contacto {
     grid-template-columns: 1fr;
     gap: 3rem;
@@ -1080,7 +944,6 @@ section[id] {
 }
 
 @media (max-width: 800px) {
-  /* Footer */
   .footer-top {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1093,7 +956,6 @@ section[id] {
 }
 
 @media (max-width: 600px) {
-  /* Skills */
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1102,16 +964,14 @@ section[id] {
     height: 56px;
   }
 
-  /* Proyectos */
   .proyectos-titulo { font-size: 2.6rem; }
   .proyecto-card h3 { font-size: 1.6rem; }
   .filtro-btn { font-size: 1rem; padding: 0.65rem 1.4rem; }
 
-  /* Mi camino */
   .mi-camino-titulo { font-size: 2.6rem; }
   .timeline-item h4 { font-size: 1.45rem; }
 
-  /* Contacto */
+
   .contacto-titulo { font-size: 2.5rem; }
   .contacto-texto { font-size: 1.15rem; }
   .contacto-link { flex: 1 1 100%; }
