@@ -108,3 +108,49 @@ if (form && estado) {
     }
   });
 }
+
+
+// ===== CARRUSEL DE SKILLS (movimiento infinito) =====
+const skillsCarrusel = document.querySelector('.skills-carrusel');
+const skillsPista = document.querySelector('.skills-carrusel .skills-grid');
+
+if (skillsCarrusel && skillsPista) {
+  const originales = Array.from(skillsPista.children);
+  const VELOCIDAD = 60;   // píxeles por segundo (subilo para ir más rápido)
+
+  const armarCarrusel = () => {
+    // Quita las copias anteriores (por si se redimensiona la ventana)
+    skillsPista.querySelectorAll('.clon').forEach(c => c.remove());
+
+    // Ancho total de un set de tarjetas (cada una con su separación)
+    const anchoSet = originales.reduce((suma, item) => {
+      return suma + item.offsetWidth + parseFloat(getComputedStyle(item).marginRight);
+    }, 0);
+    if (!anchoSet) return;
+
+    // Cuántas veces repetir el set para cubrir toda la pantalla, y luego duplicar el bloque
+    const repeticiones = Math.max(1, Math.ceil(skillsCarrusel.clientWidth / anchoSet));
+    const totalCopias = repeticiones * 2 - 1;   // ya existe 1 set (los originales)
+
+    for (let i = 0; i < totalCopias; i++) {
+      originales.forEach(item => {
+        const copia = item.cloneNode(true);
+        copia.classList.add('clon');
+        copia.setAttribute('aria-hidden', 'true');
+        skillsPista.appendChild(copia);
+      });
+    }
+
+    // Misma velocidad sin importar cuántas tecnologías haya
+    const segundos = (anchoSet * repeticiones) / VELOCIDAD;
+    skillsPista.style.setProperty('--duracion', segundos + 's');
+  };
+
+  armarCarrusel();
+
+  let temporizador;
+  window.addEventListener('resize', () => {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(armarCarrusel, 200);
+  });
+}
