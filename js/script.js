@@ -1,156 +1,65 @@
-// ===== FILTRO DE PROYECTOS =====
-const botones = document.querySelectorAll('.filtro-btn');
-const tarjetas = document.querySelectorAll('.proyecto-card');
+document.documentElement.classList.add('js');
+// Seguridad: si algo falla, se muestra todo igual
+setTimeout(() => document.querySelectorAll('.reveal').forEach(el => el.classList.add('in')), 1500);
 
-botones.forEach(boton => {
-  boton.addEventListener('click', () => {
-    // 1. sacar clase "activo" de todos, ponérsela solo al clickeado
-    botones.forEach(b => {
-      b.classList.remove('activo');
-      b.setAttribute('aria-pressed', 'false');
-    });
-    boton.classList.add('activo');
-    boton.setAttribute('aria-pressed', 'true');
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
 
-    const filtro = boton.dataset.filtro;
-
-    // 2. mostrar/ocultar tarjetas según categoría
-    //    (data-categoria puede tener varias: "python sql")
-    tarjetas.forEach(tarjeta => {
-      const categorias = (tarjeta.dataset.categoria || '').split(' ');
-      const visible = filtro === 'todos' || categorias.includes(filtro);
-      // '' devuelve el display original del CSS (flex); no usar 'block'
-      tarjeta.style.display = visible ? '' : 'none';
-    });
+// Menú hamburguesa
+const burger = document.querySelector('.burger'), menu = document.getElementById('menu');
+if (burger && menu) {
+  burger.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
   });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open'); burger.setAttribute('aria-expanded', false);
+  }));
+}
+
+// ===== Proyectos desde data/proyectos.json =====
+const grid = document.getElementById('proyectos-grid');
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const enlace = (u, t) => u
+  ? `<a href="${esc(u)}" target="_blank" rel="noopener">${t} <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`
+  : `<span class="off">${t} (pronto)</span>`;
+
+function render(lista) {
+  if (!lista.length) { grid.innerHTML = '<p class="vacio">Todavía no hay proyectos cargados.</p>'; return; }
+  grid.innerHTML = lista.map((p, i) => `
+    <article class="card" data-cat="${esc(p.categoria)}">
+      <div class="cover cv${i % 3 + 1}">
+        ${p.imagen ? `<img src="${esc(p.imagen)}" alt="${esc(p.titulo)}" loading="lazy">` : `<i class="fa-solid fa-${esc(p.icono || 'code')}"></i>`}
+        ${p.demo ? `<a href="${esc(p.demo)}" target="_blank" rel="noopener" class="ext" aria-label="Abrir ${esc(p.titulo)}"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+      </div>
+      <div class="card-b"><h3>${esc(p.titulo)}</h3><p>${esc(p.descripcion)}</p>
+        <div class="tags">${(p.tecnologias || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+        <div class="links">${enlace(p.demo, 'Ver demo')}${enlace(p.codigo, 'Ver código')}</div>
+      </div>
+    </article>`).join('');
+}
+if (grid) fetch('data/proyectos.json', { cache: 'no-store' }).then(r => r.json()).then(render)
+  .catch(() => grid.innerHTML = '<p class="vacio">No se pudieron cargar los proyectos. Abrí el sitio con Live Server.</p>');
+
+// Filtros
+const filtros = document.querySelector('.filtros');
+if (filtros) filtros.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  filtros.querySelectorAll('button').forEach(x => x.classList.remove('on')); b.classList.add('on');
+  document.querySelectorAll('.card').forEach(c => c.hidden = !(b.dataset.f === 'todos' || c.dataset.cat === b.dataset.f));
 });
 
+// Animación de entrada
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// ===== MENÚ HAMBURGUESA (mobile) =====
-const hamburguesa = document.querySelector('.hamburguesa');
-const navLinks = document.querySelector('.navbar-links');
-
-if (hamburguesa && navLinks) {
-  const cerrarMenu = () => {
-    navLinks.classList.remove('activo');
-    hamburguesa.setAttribute('aria-expanded', 'false');
-  };
-
-  hamburguesa.addEventListener('click', () => {
-    const abierto = navLinks.classList.toggle('activo');
-    hamburguesa.setAttribute('aria-expanded', String(abierto));
-  });
-
-  // Se cierra al elegir una sección o al apretar Escape
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', cerrarMenu));
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') cerrarMenu();
-  });
-}
-
-
-// ===== ANIMACIONES AL HACER SCROLL =====
-const animables = document.querySelectorAll('.animar-entrada');
-const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if ('IntersectionObserver' in window && !sinMovimiento) {
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);   // ya apareció, deja de observarlo
-      }
-    });
-  }, { threshold: 0.15 });
-
-  animables.forEach(el => observer.observe(el));
-} else {
-  // Sin soporte o con "reducir movimiento": mostrar todo de una vez
-  animables.forEach(el => el.classList.add('visible'));
-}
-
-
-// ===== AÑO AUTOMÁTICO EN EL FOOTER =====
-const anio = document.getElementById('anio');
-if (anio) anio.textContent = new Date().getFullYear();
-
-
-// ===== FORMULARIO DE CONTACTO (Formspree, sin salir de la página) =====
-const form = document.querySelector('.contacto-form');
-const estado = document.querySelector('.form-estado');
-
-if (form && estado) {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const boton = form.querySelector('button[type="submit"]');
-    boton.disabled = true;
-    boton.textContent = 'Enviando...';
-    estado.className = 'form-estado';
-    estado.textContent = '';
-
-    try {
-      const respuesta = await fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' }
-      });
-      if (!respuesta.ok) throw new Error('Error de envío');
-
-      estado.textContent = '¡Mensaje enviado! Te respondo pronto.';
-      estado.classList.add('ok');
-      form.reset();
-    } catch (error) {
-      estado.textContent = 'No se pudo enviar. Probá de nuevo o escribime por email.';
-      estado.classList.add('error');
-    } finally {
-      boton.disabled = false;
-      boton.textContent = 'Enviar mensaje';
-    }
-  });
-}
-
-
-// ===== CARRUSEL DE SKILLS (movimiento infinito) =====
-const skillsCarrusel = document.querySelector('.skills-carrusel');
-const skillsPista = document.querySelector('.skills-carrusel .skills-grid');
-
-if (skillsCarrusel && skillsPista) {
-  const originales = Array.from(skillsPista.children);
-  const VELOCIDAD = 60;   // píxeles por segundo (subilo para ir más rápido)
-
-  const armarCarrusel = () => {
-    // Quita las copias anteriores (por si se redimensiona la ventana)
-    skillsPista.querySelectorAll('.clon').forEach(c => c.remove());
-
-    // Ancho total de un set de tarjetas (cada una con su separación)
-    const anchoSet = originales.reduce((suma, item) => {
-      return suma + item.offsetWidth + parseFloat(getComputedStyle(item).marginRight);
-    }, 0);
-    if (!anchoSet) return;
-
-    // Cuántas veces repetir el set para cubrir toda la pantalla, y luego duplicar el bloque
-    const repeticiones = Math.max(1, Math.ceil(skillsCarrusel.clientWidth / anchoSet));
-    const totalCopias = repeticiones * 2 - 1;   // ya existe 1 set (los originales)
-
-    for (let i = 0; i < totalCopias; i++) {
-      originales.forEach(item => {
-        const copia = item.cloneNode(true);
-        copia.classList.add('clon');
-        copia.setAttribute('aria-hidden', 'true');
-        skillsPista.appendChild(copia);
-      });
-    }
-
-    // Misma velocidad sin importar cuántas tecnologías haya
-    const segundos = (anchoSet * repeticiones) / VELOCIDAD;
-    skillsPista.style.setProperty('--duracion', segundos + 's');
-  };
-
-  armarCarrusel();
-
-  let temporizador;
-  window.addEventListener('resize', () => {
-    clearTimeout(temporizador);
-    temporizador = setTimeout(armarCarrusel, 200);
-  });
+// Link activo según sección
+if (menu) {
+  const links = [...menu.querySelectorAll('a[href^="#"]')];
+  const so = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(l => l.classList.toggle('act', l.getAttribute('href') === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => so.observe(s));
 }

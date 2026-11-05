@@ -1,0 +1,60 @@
+[
+  {
+    "titulo": "FaltaUno",
+    "descripcion": "Plataforma para organizar partidos de padel 2 - 4 y fútbol 5 - 7 - 11.",
+    "categoria": "web",
+    "tecnologias": [
+      "React",
+      "FastAPI",
+      "PostgreSQL"
+    ],
+    "demo": "",
+    "codigo": "",
+    "icono": "futbol",
+    "imagen": ""
+  },
+  {
+    "titulo": "BDA",
+    "descripcion": "Sistema de gestión y administración para el agro.",
+    "categoria": "backend",
+    "tecnologias": [
+      "Python",
+      "FastAPI",
+      "MySQL"
+    ],
+    "demo": "",
+    "codigo": "",
+    "icono": "tractor",
+    "imagen": ""
+  },
+  {
+    "titulo": "Body Paint",
+    "descripcion": "Tienda online de indumentaria.",
+    "categoria": "web",
+    "tecnologias": [
+      "Java",
+      "Spring Boot",
+      "MySQL"
+    ],
+    "demo": "",
+    "codigo": "",
+    "icono": "shirt",
+    "imagen": ""
+  },
+  {
+    "titulo": "Establecimiento Santa Lucia",
+    "descripcion": "Una aplicación web que recibe archivos o imágenes, los analiza con IA y genera documentos. Ayuda a facilitar el cargado de datos a word, ademas cuenta con un buscador para la obtener la información de cada cerda.",
+    "categoria": "web",
+    "tecnologias": [
+      "Python",
+      "FastAPI",
+      "Anthropic API",
+      "Pillow",
+      "python-docx"
+    ],
+    "demo": "",
+    "codigo": "github.com/Facundofalco22/cerdas-excel",
+    "icono": "piggy-bank",
+    "imagen": ""
+  }
+]

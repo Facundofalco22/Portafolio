@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin | Facundo.dev</title><meta name="robots" content="noindex">
+<style>
+*{box-sizing:border-box;margin:0}body{background:#050705;color:#F5F5F5;font:15px Poppins,sans-serif;padding:1.5rem}
+h1{color:#35D66F;margin-bottom:1rem}.w{display:grid;grid-template-columns:260px 1fr;gap:1.5rem;max-width:1000px;margin:auto}
+@media(max-width:700px){.w{grid-template-columns:1fr}}
+.box{background:#101310;border:1px solid rgba(53,214,111,.25);border-radius:12px;padding:1rem}
+.it{display:block;width:100%;text-align:left;background:none;border:1px solid transparent;color:inherit;padding:.6rem;border-radius:8px;cursor:pointer}
+.it.on,.it:hover{border-color:#35D66F}label{display:block;margin:.7rem 0 .2rem;font-size:.8rem;color:#A5A5A5}
+input,textarea,select{width:100%;padding:.6rem;border-radius:8px;border:1px solid #2a3a2e;background:#050705;color:inherit;font:inherit}
+button.b{padding:.6rem 1.1rem;border-radius:999px;border:1px solid #35D66F;background:#35D66F;color:#050705;font-weight:600;cursor:pointer;margin:.8rem .5rem 0 0}
+button.g{background:none;color:#F5F5F5}button.d{border-color:#d44;background:none;color:#f77}
+p.n{color:#A5A5A5;font-size:.8rem;margin-top:1rem}
+</style></head><body>
+<h1>Panel de proyectos</h1>
+<div class="w">
+ <div class="box"><div id="lista"></div><button class="b" id="nuevo">+ Nuevo</button></div>
+ <div class="box">
+  <label>Título</label><input id="titulo">
+  <label>Descripción</label><textarea id="descripcion" rows="3"></textarea>
+  <label>Categoría</label><select id="categoria"><option>web</option><option>backend</option><option>otros</option></select>
+  <label>Tecnologías (separadas por coma)</label><input id="tecnologias">
+  <label>Link de demo (vacío si no hay)</label><input id="demo">
+  <label>Link del código (GitHub)</label><input id="codigo">
+  <label>Ícono Font Awesome (ej: futbol, tractor, shirt, code)</label><input id="icono">
+  <label>Imagen opcional (ej: img/proyectos/faltauno.jpg)</label><input id="imagen">
+  <button class="b" id="guardar">Guardar</button><button class="b d" id="borrar">Eliminar</button>
+ </div>
+</div>
+<div class="w" style="margin-top:1.5rem"><div class="box" style="grid-column:1/-1">
+ <button class="b" id="descargar">Descargar proyectos.json</button><button class="b g" id="reset">Descartar cambios</button>
+ <p class="n">Los cambios quedan guardados en este navegador. Para publicarlos, descargá el archivo y reemplazá <b>data/proyectos.json</b> de tu proyecto.</p>
+</div></div>
+<script>
+const K='fdev_proyectos',F=['titulo','descripcion','categoria','tecnologias','demo','codigo','icono','imagen'],$=i=>document.getElementById(i);
+let P=[],cur=-1;
+const save=()=>localStorage.setItem(K,JSON.stringify(P));
+function lista(){$('lista').innerHTML='';P.forEach((p,i)=>{const b=document.createElement('button');b.className='it'+(i===cur?' on':'');b.textContent=p.titulo||'(sin título)';b.onclick=()=>sel(i);$('lista').append(b)})}
+function sel(i){cur=i;const p=P[i]||{};F.forEach(f=>$(f).value=f==='tecnologias'?(p.tecnologias||[]).join(', '):(p[f]??(f==='categoria'?'web':'')));lista()}
+async function init(){try{const l=localStorage.getItem(K);P=l?JSON.parse(l):await(await fetch('data/proyectos.json')).json()}catch{P=[]}sel(P.length?0:-1);lista()}
+$('guardar').onclick=()=>{const p={};F.forEach(f=>p[f]=$(f).value.trim());p.tecnologias=p.tecnologias?p.tecnologias.split(',').map(s=>s.trim()).filter(Boolean):[];if(!p.titulo)return alert('Poné un título');cur<0?(P.push(p),cur=P.length-1):P[cur]=p;save();lista();alert('Guardado')};
+$('nuevo').onclick=()=>{cur=-1;sel(-1);lista()};
+$('borrar').onclick=()=>{if(cur<0||!confirm('¿Eliminar este proyecto?'))return;P.splice(cur,1);save();sel(P.length?0:-1);lista()};
+$('descargar').onclick=()=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(P,null,2)],{type:'application/json'}));a.download='proyectos.json';a.click()};
+$('reset').onclick=()=>{if(confirm('Se pierden los cambios no publicados')){localStorage.removeItem(K);init()}};
+init();
+</script></body></html>
